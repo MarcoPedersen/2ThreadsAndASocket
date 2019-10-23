@@ -14,8 +14,16 @@ public class MultithreadedSocketServer {
 
             while(true){
                 counter++;
+                //////////////////////////////////////////////////
+                // Before the accept happens go through Join in protocol and make sure that no error such as Username already in use //
                 Socket serverClient=server.accept();  //server accept the client connection request
+                // Also Server needs to send new list of clients connected every time that list changes //
+                // Send error if any problems //
+                //////////////////////////////////////////////////
                 System.out.println(" >> " + "Client No:" + counter + " started!");
+
+                // Send OK to client
+
                 ServerClientThread sct = new ServerClientThread(serverClient,counter); //send  the request to a separate thread
                 sct.start();
             }
