@@ -3,11 +3,15 @@ package com.company;
 import java.net.*;
 import java.io.*;
 public class MultithreadedSocketServer {
-    public static void main(String[] args) throws Exception {
+
+    private ServerSocket server = null;
+
+    public MultithreadedSocketServer(int port) {
         try{
-            ServerSocket server=new ServerSocket(8888);
+            server = new ServerSocket(port);
             int counter=0;
             System.out.println("Server Started ....");
+
             while(true){
                 counter++;
                 Socket serverClient=server.accept();  //server accept the client connection request
@@ -15,8 +19,11 @@ public class MultithreadedSocketServer {
                 ServerClientThread sct = new ServerClientThread(serverClient,counter); //send  the request to a separate thread
                 sct.start();
             }
-        }catch(Exception e){
-            System.out.println(e);
+        } catch(Exception e){
+            e.printStackTrace();
         }
+    }
+    public static void main(String[] args) {
+        MultithreadedSocketServer multithreadedSocketServer = new MultithreadedSocketServer(8888);
     }
 }

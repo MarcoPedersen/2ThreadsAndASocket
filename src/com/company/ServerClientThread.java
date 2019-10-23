@@ -5,9 +5,9 @@ import java.io.DataOutputStream;
 import java.net.Socket;
 
 class ServerClientThread extends Thread {
-    Socket serverClient;
-    int clientNo;
-    int squre;
+    private Socket serverClient;
+    private int clientNo;
+
     ServerClientThread(Socket inSocket, int counter){
         serverClient = inSocket;
         clientNo=counter;
@@ -27,8 +27,8 @@ class ServerClientThread extends Thread {
             inStream.close();
             outStream.close();
             serverClient.close();
-        }catch(Exception ex){
-            System.out.println(ex);
+        }catch(Exception e){
+            e.printStackTrace();
         }finally{
             System.out.println("Client -" + clientNo + " smutter!! ");
         }
